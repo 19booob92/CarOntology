@@ -34,6 +34,16 @@
     
 
 
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#jestKolemW -->
+
+    <owl:ObjectProperty rdf:about="#jestKolemW">
+        <rdfs:domain rdf:resource="#Kolo"/>
+        <rdfs:range rdf:resource="#Samochod"/>
+        <owl:inverseOf rdf:resource="#posiadaKolo"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#jestNadwoziemSamochodu -->
 
     <owl:ObjectProperty rdf:about="#jestNadwoziemSamochodu">
@@ -49,6 +59,7 @@
     <owl:ObjectProperty rdf:about="#jestPodwoziemW">
         <rdfs:domain rdf:resource="#Podwozie"/>
         <rdfs:range rdf:resource="#Samochod"/>
+        <owl:inverseOf rdf:resource="#posiadaPodwozie"/>
     </owl:ObjectProperty>
     
 
@@ -58,6 +69,22 @@
     <owl:ObjectProperty rdf:about="#jestSilnikiemW">
         <rdfs:range rdf:resource="#Samochod"/>
         <rdfs:domain rdf:resource="#Silnik"/>
+        <owl:inverseOf rdf:resource="#posiadaSilnik"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#pochodziZ -->
+
+    <owl:ObjectProperty rdf:about="#pochodziZ"/>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#posiadaKolo -->
+
+    <owl:ObjectProperty rdf:about="#posiadaKolo">
+        <rdfs:range rdf:resource="#Kolo"/>
+        <rdfs:domain rdf:resource="#Samochod"/>
     </owl:ObjectProperty>
     
 
@@ -97,6 +124,74 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Country -->
+
+    <owl:Class rdf:about="#Country"/>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Ferrari -->
+
+    <owl:Class rdf:about="#Ferrari">
+        <rdfs:subClassOf rdf:resource="#SamochodOkreslonejMarki"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Wlochy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Fiat -->
+
+    <owl:Class rdf:about="#Fiat">
+        <rdfs:subClassOf rdf:resource="#SamochodOkreslonejMarki"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Wlochy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Kolo -->
+
+    <owl:Class rdf:about="#Kolo"/>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Mercedes -->
+
+    <owl:Class rdf:about="#Mercedes">
+        <rdfs:subClassOf rdf:resource="#SamochodOkreslonejMarki"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Niemcy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Mitshubishi -->
+
+    <owl:Class rdf:about="#Mitshubishi">
+        <rdfs:subClassOf rdf:resource="#SamochodOkreslonejMarki"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Japonia"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
@@ -176,9 +271,30 @@
     
 
 
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Porshe -->
+
+    <owl:Class rdf:about="#Porshe">
+        <rdfs:subClassOf rdf:resource="#SamochodOkreslonejMarki"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Niemcy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Samochod -->
 
     <owl:Class rdf:about="#Samochod">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#posiadaKolo"/>
+                <owl:onClass rdf:resource="#Kolo"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">4</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="#posiadaSilnik"/>
@@ -217,6 +333,12 @@
                 <owl:allValuesFrom rdf:resource="#NadwozieCabrio"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#posiadaNadwozie"/>
+                <owl:someValuesFrom rdf:resource="#NadwozieCabrio"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -247,14 +369,14 @@
         <rdfs:subClassOf rdf:resource="#SamochodOkreslonegoTypu"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="#posiadaSilnik"/>
-                <owl:someValuesFrom rdf:resource="#SilnikDiesla"/>
+                <owl:onProperty rdf:resource="#posiadaNadwozie"/>
+                <owl:allValuesFrom rdf:resource="#NadwozieCombi"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="#posiadaNadwozie"/>
-                <owl:allValuesFrom rdf:resource="#NadwozieCombi"/>
+                <owl:onProperty rdf:resource="#posiadaSilnik"/>
+                <owl:someValuesFrom rdf:resource="#SilnikDiesla"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -399,6 +521,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#SamochodOkreslonejMarki -->
+
+    <owl:Class rdf:about="#SamochodOkreslonejMarki">
+        <rdfs:subClassOf rdf:resource="#Samochod"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#SamochodRodzinny -->
 
     <owl:Class rdf:about="#SamochodRodzinny">
@@ -527,6 +657,74 @@
     
 
 
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#SamochodZOkreslonegoKraju -->
+
+    <owl:Class rdf:about="#SamochodZOkreslonegoKraju">
+        <rdfs:subClassOf rdf:resource="#Samochod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#SamochodyJaponskie -->
+
+    <owl:Class rdf:about="#SamochodyJaponskie">
+        <rdfs:subClassOf rdf:resource="#SamochodZOkreslonegoKraju"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Japonia"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#SamochodyNiemieckie -->
+
+    <owl:Class rdf:about="#SamochodyNiemieckie">
+        <rdfs:subClassOf rdf:resource="#SamochodZOkreslonegoKraju"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Niemcy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#SamochodyPolskie -->
+
+    <owl:Class rdf:about="#SamochodyPolskie">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="#SamochodZOkreslonegoKraju"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#pochodziZ"/>
+                        <owl:hasValue rdf:resource="#Polska"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#SamochodyWloskie -->
+
+    <owl:Class rdf:about="#SamochodyWloskie">
+        <rdfs:subClassOf rdf:resource="#SamochodZOkreslonegoKraju"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Wlochy"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Silnik -->
 
     <owl:Class rdf:about="#Silnik"/>
@@ -571,6 +769,77 @@
         <rdfs:subClassOf rdf:resource="#SilnikBenzynowy"/>
         <owl:disjointWith rdf:resource="#SilnikBoxer"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Warszawa -->
+
+    <owl:Class rdf:about="#Warszawa">
+        <rdfs:subClassOf rdf:resource="#SamochodOkreslonejMarki"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#pochodziZ"/>
+                <owl:hasValue rdf:resource="#Polska"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Japonia -->
+
+    <owl:Thing rdf:about="#Japonia">
+        <rdf:type rdf:resource="#Country"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Korea -->
+
+    <Country rdf:about="#Korea">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </Country>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Niemcy -->
+
+    <owl:Thing rdf:about="#Niemcy"/>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Polska -->
+
+    <Country rdf:about="#Polska">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </Country>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#WIelkaBrytania -->
+
+    <Country rdf:about="#WIelkaBrytania">
+        <rdf:type rdf:resource="&owl;Thing"/>
+    </Country>
+    
+
+
+    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#Wlochy -->
+
+    <owl:Thing rdf:about="#Wlochy">
+        <rdf:type rdf:resource="#Country"/>
+    </owl:Thing>
     
 
 
