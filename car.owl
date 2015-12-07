@@ -125,12 +125,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/booob/ontologies/2015/11/TestCar.owl#posiadaSpalanie -->
-
-    <owl:ObjectProperty rdf:about="#posiadaSpalanie"/>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -558,20 +552,18 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="#Samochod"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="#posiadaSilnik"/>
-                        <owl:someValuesFrom rdf:resource="#SilnikDiesla"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="#posiadaNadwozie"/>
-                        <owl:allValuesFrom>
-                            <owl:Class>
-                                <owl:unionOf rdf:parseType="Collection">
-                                    <rdf:Description rdf:about="#NadwozieHatchBack"/>
-                                    <rdf:Description rdf:about="#NadwozieMiniVan"/>
-                                    <rdf:Description rdf:about="#NadwozieSedan"/>
-                                </owl:unionOf>
-                            </owl:Class>
-                        </owl:allValuesFrom>
+                        <owl:onProperty rdf:resource="#spalanieNa100Km"/>
+                        <owl:someValuesFrom>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="&rdfs;Datatype"/>
+                                <owl:onDatatype rdf:resource="&xsd;integer"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:maxExclusive rdf:datatype="&xsd;integer">15</xsd:maxExclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdf:Description>
+                        </owl:someValuesFrom>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
